@@ -20,19 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'API\UserController@login');
 Route::post('register','API\UserController@register' );
 
-Route::get('test', 'MagasinController@index');
-Route::get('test1', function(){
-    return response()->json([
-        [
-            "id" => "1",
-            "title" => "Marjane"
-        ],
-        [
-            "id" => "2",
-            "title" => "Bim"
-        ]
-    ]);
-});
+Route::get('magasin', 'MagasinController@index');
+Route::get('produit','ProduitController@index');
 
 
 
