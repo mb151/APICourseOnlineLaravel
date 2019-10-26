@@ -9,15 +9,38 @@ use Illuminate\Support\Facades\DB;
 class MagasinController extends Controller
 {
     public function index(){
-        // $magsin = Magasin::all();
+        $magasin = Magasin::all();
+        return response()->json([
+            'magasin' => $magasin,
+        ]);
+    }
 
-        $magsin = DB::table('categories')
-                    ->join('magasins','magasins.idCateg','=','categories.idCateg')
-                    ->select('magasins.nom','magasins.image','categories.nomCateg')
+    public function getMagasinFromAppropriateCategorie($id){
+        $magsin = DB::table('magasins')
+                    ->join('categories', function($join){
+                        $join->on('magasins.idCateg', '=', 'categories.idCateg');
+                    })
+                    ->select('categories.nomCateg', 'magasins.*')
+                    ->where('categories.idCateg', $id)
                     ->get();
         return response()->json(
             [
                'magasin' => $magsin 
             ]);
     }
+
+    public function geTypeFromAppropriateCategorieOfMagasin($id){
+        $types = DB::table('types')
+                    ->join('categories', function($join){
+                        $join->on('types.idCategorie', '=', 'categories.idCateg');
+                    })
+                    ->select('categories.nomCateg', 'types.*')
+                    ->where('categories.idCateg', $id)
+                    ->get();
+        return response()->json(
+            [
+               'types' => $types 
+            ]);
+    }
+    
 }

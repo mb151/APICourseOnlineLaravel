@@ -23,6 +23,8 @@ Route::post('register','API\UserController@register' );
 Route::get('magasin', 'MagasinController@index');
 Route::get('produit','ProduitController@index');
 Route::get('categorie', 'CategorieController@index');
+Route::get('magasinParCateg/{id}', 'MagasinController@getMagasinFromAppropriateCategorie');
+Route::get('typeParCateg/{id}', 'MagasinController@geTypeFromAppropriateCategorieOfMagasin');
 
 
 
