@@ -19,13 +19,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login', 'API\UserController@login');
 Route::post('register','API\UserController@register' );
-
+Route::post('savepanier','ProduitController@saveToFavorite');
+Route::get('panier','ProduitController@getAllPanier');
+Route::get('commande','ProduitController@getAllCommande');
 Route::get('magasin', 'MagasinController@index');
 Route::get('produit','ProduitController@index');
 Route::get('categorie', 'CategorieController@index');
 Route::get('magasinParCateg/{id}', 'MagasinController@getMagasinFromAppropriateCategorie');
 Route::get('typeParCateg/{id}', 'MagasinController@geTypeFromAppropriateCategorieOfMagasin');
 Route::get('produitMag/{id}', 'ProduitController@getProductOfAppropriateMagasin');
+Route::get('produitdetail/{id}', 'ProduitController@getProductDetail');
+Route::get('allproduct', 'ProduitController@getAllProduct');
 
 
 
